@@ -13,7 +13,8 @@
 
 ## 2.Reset Router 1841.
 
-
+- set baud rate(speed) về 1200
+- tắt router bà bật lại.
 
 ## 3.Cấu hình trên router R1
 ```
@@ -54,9 +55,10 @@ access-list 1 permit any
 ip nat inside source list 1 interface f0/0 overload
 interface f0/0
 ip nat outside
-interface f0/1
+interface f0/1.81
 ip nat inside
-
+interface f0/1.82
+ip nat inside
 ```
 
 
@@ -141,6 +143,20 @@ switchport access vlan 81
 int range f0/11-20
 switchport mode access
 switchport access vlan 82
+
+int vlan 81
+ip add 192.168.81.3
+
+## Cấu hình ssh
+username lam password 123
+ip domain-name meditech
+crypto key generate rsa general-keys modulus 1024
+line vty 0 4
+transport input ssh
+password 123
+login local
+
+
 do wr
 
 ```
