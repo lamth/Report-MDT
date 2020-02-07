@@ -8,6 +8,11 @@ https://www.juniper.net/documentation/en_US/release-independent/junos/topics/top
 - Thông số phần cứng:
 https://www.juniper.net/documentation/en_US/release-independent/junos/topics/concept/ex2300-hardware-overview.html
 
+
+- Specs:
+https://www.juniper.net/assets/fr/fr/local/pdf/datasheets/1000579-en.pdf
+
+
 ## 1. Cấu hình mặc định
 
 Juniper EX series có cấu hình mặc định (factory-default configuration), khi cấu hình và commit các cấu hình, cấu hình mới sẽ trở thành cấu hình hoạt động cho switch. Có thể quay trở về cấu hình mặc định theo hướng dẫn [ở đây](#default).
@@ -115,4 +120,21 @@ user@switch# delete chassis config-button no-clear
 user@switch# commit
 ```
 
+
+### Khôi phục cấu hình gốc sử dụng câu lệnh request system zeroize
+
+Câu lệnh `request system zeroize` sẽ xóa tất cả thông tin cấu hình và khôi phục lại các giá trị, đồng thời hệ thống bỏ liên kết đến tất cả các file người dùng tạo ra, bao gồm file cấu hình, file log, khỏi cây thư mục của nó. Sau đó khởi động lại switch để đưa nó về cấu hình mặc định.
+
+To revert to the factory-default configuration by using the request system zeroize command:
+```
+user@switch> request system zeroize
+warning: System will be rebooted and may not boot without configuration
+Erase all data, including configuration and log files? [yes,no] (yes)
+```
+Type yes to remove configuration and log files and revert to the factory-default configuration.
+
+
+
+
+(có thể sẽ còn tiếp)
 
