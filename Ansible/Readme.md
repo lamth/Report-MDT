@@ -1,4 +1,4 @@
-# 1 bài ghi sơ sơ về ansible
+# Ansible
 
 Bài viết này mình chỉ viết lại cho nhớ thôi, Tham khảo từ một số nguồn: 
 https://github.com/VNPT-SmartCloud-System/Tim-hieu-Ansible
@@ -7,13 +7,13 @@ https://docs.ansible.com/
 
 
 
-[I. Tổng quan về Ansible?](#tongquan)
-[II. Ansible Role và Ansible Galaxy](#role)
+- [I. Tổng quan về Ansible?](#tongquan)
+- [II. Ansible Role và Ansible Galaxy](#role)
 
 
-<a name="tongquan"></a>
+<a name=tongquan></a>
 
-## [I. Tổng quan về Ansible?](#tongquan)
+## I. Tổng quan về Ansible?
 
 **Ansible** là một công cụ mã nguồn mở được sử dụng để tự động hóa các tác vụ it như triển khai hệ thống, dịch vụ, quản lý các cài đặt, thiết lập của hệ thống hay dịch vụ, điều phối các dịch vụ nội bộ,...
 
@@ -174,6 +174,6 @@ Thay vì sử dụng module `command` chúng ta có thể sử dụng module `ap
       service: name=nginx state=started enabled=yes
 ```
 
-<a name="role"></a>
+<a name=role></a>
 
-[II. Ansible Role và Ansible Galaxy](#role)
+# II. Ansible Role và Ansible Galaxy
