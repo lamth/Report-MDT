@@ -177,3 +177,31 @@ Thay vì sử dụng module `command` chúng ta có thể sử dụng module `ap
 <a name=role></a>
 
 # II. Ansible Role và Ansible Galaxy
+## 1. Ansible role
+Ansible role là một bộ các tasks để cấu hình một host nhằm phục vụ một mục đích chính như là cấu hình một dịch vụ.
+Nó là một cơ chế để tách playbook thành nhiều file, để đơn giản hóa việc viết các playbook phức tạp để tái sử dụng lại nhiều lần .
+Role được định nghĩa sử dụng các file YAML với cấu trúc thư mục được định nghĩa trước.
+
+Một cấu trúc thư mục của role gồm các thư mục: `defaults`, `vars`, `tasks`, `files`, `templates`, `meta`, `handlers`.Mỗi thư mục đều phải chứa một file main.yml chứa các nội dung liên quan đến thư mục đó. Chi tiết về các thư mục:
+- **defaults**: là thư mục chứa các biến mặc định cho role. Các biến trong thư mục này có đặc quyền thấp nhất nên nó dễ dàng bị ghi đè.
+- **vars**: chứa các biến của role có đặc quyền cao hơn và có thể ghi đè các biến ở trong defaults.
+- **tasks**: Chứa danh sách chính của các bước sẽ được thực thi bởi role
+- **files**: chứa các file mà chúng ta muốn copy đến các host. Không cần chỉ định đường dẫn tới các file trong thư mục này.
+- **templates**: chứa các file mẫu mà hỗ trợ chỉnh sửa từ role. Chúng ta có thể tạo file templates sử dụng Jinja2 templating.
+- **meta**: chứa các metadata của role như tác giả, thông tin về nền tảng hỗ trợ, các dependencies.
+- **handlers**: chứa các trình sử lý mà có thể được gọi bởi chỉ thị `notify` và được liên kết với dịch vụ.
+
+Một role phải có ít nhất một trong 7 thư mục trên để được Ansible coi là một role.
+
+Ví dụ về role trong việc triển khai dịch vụ nginx.
+
+
+
+
+
+
+
+
+
+Nguồn tham khảo:
+https://medium.com/@mitesh_shamra/ansible-roles-1d1954f9932a
