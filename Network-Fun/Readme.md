@@ -1,4 +1,4 @@
-## Mục lục 
+## Tìm hiểu về mạng máy tính cơ bản.
 
 - [ Mạng máy tính ](./docs/01.What-is-network.md)
 - [ Ưu điểm và nhược điểm của Network. ](./docs/02.advantages-and-disadvantages-of-network.md)
