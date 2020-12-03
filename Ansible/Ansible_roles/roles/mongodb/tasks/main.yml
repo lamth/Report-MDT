@@ -1,0 +1,21 @@
+---
+# tasks file for mongoDB setup
+
+- name: Add APT key for mongoDB
+  apt_key:
+    url: "https://www.mongodb.org/static/pgp/server-4.4.asc"
+    state: present
+
+- name: Add apt repository for mongoDB
+  apt_repository:
+    repo: deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.4 multiverse
+    filename: 'mongodb-org-4.4.list'
+    state: present
+
+- name: Apt update and install mongodb-org package 
+  apt:
+    name: mongodb-org
+    update_cache: yes
+
+- name: Start the mongodb service
+

@@ -68,6 +68,11 @@ sudo yum update
 sudo yum install epel-release
 sudo yum install ansible
 ```
+- Nếu sử dụng Ubuntu 20: 
+```
+sudo apt update
+sudo apt install ansible
+```
 - Khai báo các host vào file inventory:
 ```
 cat << EOF > /etc/ansible/hosts
