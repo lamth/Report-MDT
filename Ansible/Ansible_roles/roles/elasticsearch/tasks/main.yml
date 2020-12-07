@@ -5,7 +5,7 @@
   apt_key: 
     url: "https://artifacts.elastic.co/GPG-KEY-elasticsearch" 
     state: present
-  tag: 
+  tags: 
     - deploy_new
 
 
@@ -14,7 +14,7 @@
     repo: deb https://artifacts.elastic.co/packages/7.x/apt stable main
     filename: 'elastic-7.x.list'
     state: present
-  tag: 
+  tags: 
     - deploy_new
 
 
@@ -22,7 +22,7 @@
   apt:
     name: elasticsearch
     update_cache: yes
-  tag: 
+  tags: 
     - deploy_new
 
 
@@ -31,7 +31,7 @@
     name: elasticsearch
     enabled: yes
     state: started
-  tag: 
+  tags: 
     - deploy_new
 
 
@@ -44,5 +44,5 @@
     mode: 0660
   notify:
     - restart elasticsearch
-  tag: 
+  tags: 
     - deploy_new

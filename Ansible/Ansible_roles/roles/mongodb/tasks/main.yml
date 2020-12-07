@@ -5,7 +5,8 @@
   apt_key:
     url: "https://www.mongodb.org/static/pgp/server-4.4.asc"
     state: present
-
+  tags: 
+    - deploy_new
 
 - name: Add apt repository for mongoDB
   apt_repository:
@@ -68,9 +69,9 @@
   mongodb_user:
     login_port: "27017"
     database: "admin"
-    name: "{{ admin_login }}"
-    password: "{{ admin_password }}"
-    roles: "root"
+    name: "lamth"
+    password: "Lam28492849"
+    roles: "userAdminAnyDatabase"
   tags: 
     - deploy_new
 
