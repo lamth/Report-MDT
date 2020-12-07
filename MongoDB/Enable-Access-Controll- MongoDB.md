@@ -52,9 +52,22 @@ db.createUser(
 )
 ```
 
+Tắt mongod
 
+## 3.4. Cấu hình bật kiểm soát truy cập
+Sửa file cấu hình ở phần sau:
+```
+security:
+  security.authorization: enabled
+```
 
+Khởi động lại mongod
 
+## 3.5. Kết nối đến mongo
+
+```
+mongo -u myUserAdmin -p --authenticationDatabase "admin"
+``` 
 
 
 
