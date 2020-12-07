@@ -1,0 +1,48 @@
+---
+# Task file for installing Elasticsearch
+
+- name: Add APT key for Elasticsearch repo
+  apt_key: 
+    url: "https://artifacts.elastic.co/GPG-KEY-elasticsearch" 
+    state: present
+  tag: 
+    - deploy_new
+
+
+- name: Add apt repository for Elasticsearch
+  apt_repository: 
+    repo: deb https://artifacts.elastic.co/packages/7.x/apt stable main
+    filename: 'elastic-7.x.list'
+    state: present
+  tag: 
+    - deploy_new
+
+
+- name: Update apt cache and install elasticsearch package
+  apt:
+    name: elasticsearch
+    update_cache: yes
+  tag: 
+    - deploy_new
+
+
+- name: Start the elasticsearch service
+  service:
+    name: elasticsearch
+    enabled: yes
+    state: started
+  tag: 
+    - deploy_new
+
+
+- name: copy config file
+  copy:
+    src: elasticsearch.yml
+    dest: /etc/elasticsearch/elasticsearch.yml
+    owner: root
+    group: elasticsearch
+    mode: 0660
+  notify:
+    - restart elasticsearch
+  tag: 
+    - deploy_new

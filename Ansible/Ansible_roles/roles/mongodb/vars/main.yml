@@ -1,0 +1,7 @@
+mongodb_name: admin
+mongodb_user: lamth 
+mongodb_password: 123456
+mongodb_bind_ip: 127.0.0.1
+mongodb_port: 27017
+admin_login: admin
+admin_password: admin123456

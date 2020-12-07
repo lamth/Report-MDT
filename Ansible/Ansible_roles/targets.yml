@@ -1,0 +1,6 @@
+- name: Setup mongodb and elasticsearch
+  hosts: test_servers
+  user: root
+  roles:
+    - mongodb
+    - elasticsearch

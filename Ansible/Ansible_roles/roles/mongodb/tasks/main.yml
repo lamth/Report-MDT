@@ -1,21 +1,68 @@
 ---
 # tasks file for mongoDB setup
 
-- name: Add APT key for mongoDB
+- name: Add APT key for mongoDB repo
   apt_key:
     url: "https://www.mongodb.org/static/pgp/server-4.4.asc"
     state: present
+  tag: 
+    - deploy_new
 
 - name: Add apt repository for mongoDB
   apt_repository:
     repo: deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.4 multiverse
     filename: 'mongodb-org-4.4.list'
     state: present
-
+  tag: 
+    - deploy_new
+- name: Add apt repository universe
+  apt_repository:
+    repo: deb http://archive.ubuntu.com/ubuntu/ bionic universe
+    state: present
+  tag: 
+    - deploy_new
 - name: Apt update and install mongodb-org package 
   apt:
     name: mongodb-org
     update_cache: yes
-
+  tag: 
+    - deploy_new
+- name: Apt update and install pip3
+  apt:
+    name: python3-pip
+  tag: 
+    - deploy_new
 - name: Start the mongodb service
+  service:
+    name: mongod
+    enabled: yes
+    state: started
+  tag: 
+    - deploy_new
+- name: Install pymongo
+  pip:
+    name: pymongo
+    state: present
+  tag: 
+    - deploy_new
+- name: copy config file
+  copy:
+    src: mongod.conf
+    dest: /etc/mongod.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart mongod
+  tag: 
+    - deploy_new
+
+- name: Create MongoDB root 
+  mongodb_user:
+    login_port: "27017"
+    database: "admin"
+    name: "{{ admin_login }}"
+    password: "{{ admin_password }}"
+    roles: "root"
+  tag: 
+    - deploy_new
 

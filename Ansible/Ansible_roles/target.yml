@@ -1,3 +1,0 @@
-- host: test_servers
-  roles:
-          - mongodb
