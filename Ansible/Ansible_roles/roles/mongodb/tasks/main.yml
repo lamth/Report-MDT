@@ -5,45 +5,53 @@
   apt_key:
     url: "https://www.mongodb.org/static/pgp/server-4.4.asc"
     state: present
-  tag: 
-    - deploy_new
+
 
 - name: Add apt repository for mongoDB
   apt_repository:
     repo: deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu bionic/mongodb-org/4.4 multiverse
     filename: 'mongodb-org-4.4.list'
     state: present
-  tag: 
+  tags: 
     - deploy_new
+
+
 - name: Add apt repository universe
   apt_repository:
     repo: deb http://archive.ubuntu.com/ubuntu/ bionic universe
     state: present
-  tag: 
+  tags: 
     - deploy_new
+
+
 - name: Apt update and install mongodb-org package 
   apt:
     name: mongodb-org
     update_cache: yes
-  tag: 
+  tags: 
     - deploy_new
+
+
 - name: Apt update and install pip3
   apt:
     name: python3-pip
-  tag: 
+  tags: 
     - deploy_new
+
 - name: Start the mongodb service
   service:
     name: mongod
     enabled: yes
     state: started
-  tag: 
+  tags: 
     - deploy_new
+
+
 - name: Install pymongo
   pip:
     name: pymongo
     state: present
-  tag: 
+  tags: 
     - deploy_new
 - name: copy config file
   copy:
@@ -53,7 +61,7 @@
     group: root
     mode: 0644
   notify: restart mongod
-  tag: 
+  tags: 
     - deploy_new
 
 - name: Create MongoDB root 
@@ -63,6 +71,6 @@
     name: "{{ admin_login }}"
     password: "{{ admin_password }}"
     roles: "root"
-  tag: 
+  tags: 
     - deploy_new
 
