@@ -7,6 +7,7 @@
     state: present
   tags: 
     - deploy_new
+    - deploy_new_without_authentication
 
 - name: Add apt repository for mongoDB
   apt_repository:
@@ -15,7 +16,7 @@
     state: present
   tags: 
     - deploy_new
-
+    - deploy_new_without_authentication
 
 - name: Add apt repository universe
   apt_repository:
@@ -31,7 +32,7 @@
     update_cache: yes
   tags: 
     - deploy_new
-
+    - deploy_new_without_authentication
 
 - name: Apt update and install pip3
   apt:
@@ -46,6 +47,7 @@
     state: started
   tags: 
     - deploy_new
+    - deploy_new_without_authentication
 
 
 - name: Install pymongo
@@ -54,24 +56,71 @@
     state: present
   tags: 
     - deploy_new
+
+    
 - name: copy config file
-  copy:
-    src: mongod.conf
+  template:
+    src: mongod.conf.j2
     dest: /etc/mongod.conf
     owner: root
     group: root
     mode: 0644
-  notify: restart mongod
   tags: 
     - deploy_new
 
-- name: Create MongoDB root 
+- name: Restart the mongodb service
+  service:
+    name: mongod
+    state: restarted
+  tags: 
+    - deploy_new 
+
+- name: Create MongoDB root user
   mongodb_user:
-    login_port: "27017"
-    database: "admin"
-    name: "lamth"
-    password: "Lam28492849"
-    roles: "userAdminAnyDatabase"
+    login_port: '{{ mongodb_port }}'
+    database: '{{ admindb_name }}'
+    name: '{{ admin_login }}'
+    password: '{{ admin_password }}' 
+    roles: 'root'
   tags: 
     - deploy_new
 
+- name: Edit bind IP address
+  lineinfile:
+    dest: /etc/mongod.conf
+    regexp: "  bindIp:"
+    line: '  bindIp: {{ inventory_hostname }}'
+    backrefs: yes
+  tags: 
+    - deploy_new
+ 
+
+- name: Enable Access Controll
+  lineinfile:
+    dest: /etc/mongod.conf
+    regexp: "^[  ]{2,}authorization:"
+    line: '  authorization: enabled'
+    backrefs: yes
+  tags: 
+    - deploy_new
+
+- name: Restart the mongodb service
+  service:
+    name: mongod
+    state: restarted
+  tags: 
+    - deploy_new    
+
+- name: Add user name and database
+  mongodb_user:
+    login_database: '{{ admindb_name }}'
+    login_port: '{{ mongodb_port }}'
+    login_host: '{{ inventory_hostname }}'
+    login_user: '{{ admin_login }}'
+    login_password: '{{ admin_password }}'
+    database: '{{ mongodb_name }}'
+    name: '{{ mongodb_user }}'
+    password: '{{ mongodb_password }}' 
+    roles: 'dbAdmin,userAdmin,readWrite'
+  tags: 
+    - deploy_new

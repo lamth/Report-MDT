@@ -1,6 +1,9 @@
 - name: Setup mongodb and elasticsearch
   hosts: test_servers
   user: root
+  # tasks:
+  #   - debug:
+  #       msg: "{{ inventory_hostname }}"
   roles:
     - mongodb
     - elasticsearch
