@@ -85,14 +85,14 @@
   tags: 
     - deploy_new
 
-- name: Edit bind IP address
-  lineinfile:
-    dest: /etc/mongod.conf
-    regexp: "  bindIp:"
-    line: '  bindIp: {{ inventory_hostname }}'
-    backrefs: yes
-  tags: 
-    - deploy_new
+# - name: Edit bind IP address
+#   lineinfile:
+#     dest: /etc/mongod.conf
+#     regexp: "  bindIp:"
+#     line: '  bindIp: {{ inventory_hostname }}'
+#     backrefs: yes
+#   tags: 
+#     - deploy_new
  
 
 - name: Enable Access Controll
@@ -115,7 +115,6 @@
   mongodb_user:
     login_database: '{{ admindb_name }}'
     login_port: '{{ mongodb_port }}'
-    login_host: '{{ inventory_hostname }}'
     login_user: '{{ admin_login }}'
     login_password: '{{ admin_password }}'
     database: '{{ mongodb_name }}'
