@@ -58,7 +58,7 @@ Tắt mongod
 Sửa file cấu hình ở phần sau:
 ```
 security:
-  security.authorization: enabled
+  authorization: enabled
 ```
 
 Khởi động lại mongod
