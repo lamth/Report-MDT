@@ -1,6 +1,4 @@
-<header>
-Tìm hiểu làm việc với Virtual Environment.
-</header>
+# Tìm hiểu làm việc với Virtual Environment.
 
 # Virtual Environment là gì?
 
@@ -39,11 +37,30 @@ virtualenv lamth_env
 ```
 source lamth_env/bin/activate
 ```
-source my_project_env/bin/activate
-```
+
 Cài đặt gói:
 ```
 pip install requests
+```
+
+Hiển thị các gói được cài đặt bằng pip3 và phiên bản của chúng:
+```
+pip3 freeze
+```
+output
+```
+click==7.1.2
+dnspython==1.16.0
+eventlet==0.29.1
+Flask==1.1.2
+greenlet==0.4.17
+gunicorn==20.0.4
+ipaddress==1.0.23
+itsdangerous==1.1.0
+Jinja2==2.11.2
+MarkupSafe==1.1.1
+six==1.15.0
+Werkzeug==1.0.1
 ```
 
 Thoát khỏi môi trường VirtualEnv
